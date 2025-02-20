@@ -4,6 +4,7 @@ using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace JatekProjekt
 {
@@ -13,7 +14,7 @@ namespace JatekProjekt
         {
             ConsoleKey billentyu, bilo, elagazas;
             string valasztas = "";
-            string[] repertoar = { "Kard", "Balta", "Szigony" };
+            string[] repertoar = { "kard", "balta", "szigony" };
             int HP = 100;
             
 
@@ -23,58 +24,126 @@ namespace JatekProjekt
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.WriteLine(" A SÁPADT KIRÁLYSÁG ");
                 Console.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine("Nyomj meg egy billentyűt a folytatáshoz...");
+                bilo = Console.ReadKey(true).Key;
+                Console.Clear();
+                Console.WriteLine();
+                string beve = "BEVEZETŐ BEVEZETŐ BEVEZETŐ BEVEZETŐ";
+                string[] szavakBeve = beve.Split(' ');
+
+                foreach (string szo in szavakBeve)
+                {
+                    Console.Write(szo + " ");
+                    Thread.Sleep(300);
+                }
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("--------------------------");
+                Console.ResetColor();
+                Console.WriteLine("Nyomj meg egy billentyűt a folytatáshoz...");
+                bilo = Console.ReadKey(true).Key;
+                Console.WriteLine();
+                string allomas = "ÁLLOMÁS ÁLLOMÁS ÁLLOMÁS ÁLLOMÁS";
+                string[] szavakAllomas = allomas.Split(' ');
+
+                foreach (string szo in szavakAllomas)
+                {
+                    Console.Write(szo + " ");
+                    Thread.Sleep(300);
+                }
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("--------------------------");
+                Console.ResetColor();
                 Console.WriteLine("Nyomj meg egy billentyűt a folytatáshoz...");
                 bilo = Console.ReadKey(true).Key;
                 Console.Clear();
 
-                Console.WriteLine("BEVEZETŐ");
-                
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("--------------------------");
-                Console.ResetColor();
 
-                Console.WriteLine("ELSŐ ÁLLOMÁS ISMERTETÉSE");
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("--------------------------");
-                Console.ResetColor();
-
+                Console.WriteLine();
                 Console.Write("Add meg karaktered keresztnevét: ");
+                Console.ForegroundColor= ConsoleColor.DarkRed;
                 string Nev = Console.ReadLine();
-
-                Console.WriteLine($"Válaszz az alábbi fegyverek közül: {repertoar[0]}, {repertoar[1]}, {repertoar[2]}");
+                Console.ResetColor();
+                Console.WriteLine();
+            valasztas:
+                Console.Write($"Válaszz az alábbi fegyverek közül: ");
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine($"{repertoar[0]}, {repertoar[1]}, {repertoar[2]}");
+                Console.ResetColor();
+                Console.WriteLine();
+                Console.Write("Választásod mely veled marad: ");
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+               
                 valasztas = Console.ReadLine();
+                Console.ResetColor();
+                Console.WriteLine();
                 if (valasztas == repertoar[0])
                     valasztas = repertoar[0];
                 else if (valasztas == repertoar[1])
                 {
                     valasztas = repertoar[1];
                 }
-                else
+                else if (valasztas == repertoar[2])
                 {
                     valasztas = repertoar[2];
                 }
-
+                else
+                {
+                    goto valasztas;
+                }
                 Console.Clear();
-
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                
                 Console.WriteLine($"Te, {Nev} Verath egy {valasztas} kíséretében és megannyi felszereléssel útnak indulsz...");
+                Console.ResetColor();
+                Console.WriteLine();
                 
 
             elso:
-                Console.WriteLine("ELSŐ ELÁGAZÁS (<- ->)");
+                
+                string elsoter = "ELSOTER ELSOTER ELSOTER ELSOTER";
+                string[] szavakElsoter = elsoter.Split(' ');
+
+                foreach (string szo in szavakElsoter)
+                {
+                    
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(szo + " ");
+                    Thread.Sleep(300);
+                    Console.ResetColor();
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.WriteLine("Mit teszel? <- ->");
                 Console.Write($"{Nev} Verath: ");
+                Console.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine();
                 elagazas = Console.ReadKey().Key;
                 if (elagazas == ConsoleKey.LeftArrow)
                 {
                     Console.WriteLine("OPCIO1");
-                
-                    Console.WriteLine("Mit teszel? (<- ->)");
+
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.WriteLine("Mit teszel? <- ->");
                     Console.Write($"{Nev} Verath: ");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    Console.WriteLine();
                     elagazas = Console.ReadKey().Key;
                     if (elagazas == ConsoleKey.LeftArrow)
                     {
                         Console.WriteLine("opc1 KIMENETEL1");
-                        //mittudom én vesszen 2 HP
-                        HP = HP - 2;
+                        //mittudom én vesszen 20 HP
+                        HP = HP - 20;
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine($"Aktuális életerő: {HP}");
                         Console.ResetColor();
@@ -83,8 +152,8 @@ namespace JatekProjekt
                     else if (elagazas == ConsoleKey.RightArrow)
                     {
                         Console.WriteLine("opc1 KIMENETEL2!");
-                        //mittudom én vesszen 5 HP
-                        HP = HP - 5;
+                        //mittudom én vesszen 50 HP
+                        HP = HP - 50;
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine($"Aktuális életerő: {HP}");
                         Console.ResetColor();
@@ -95,6 +164,7 @@ namespace JatekProjekt
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine(" KEZDJÜK ÚJRA! ");
                         Console.ResetColor();
+                        Console.WriteLine();
                         goto elso;
                     }
                     
@@ -102,9 +172,14 @@ namespace JatekProjekt
                 else if (elagazas == ConsoleKey.RightArrow)
                 {
                     Console.WriteLine("OPCIO2");
-                
-                    Console.WriteLine("Mit teszel? (<- ->)");
+
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.WriteLine("Mit teszel? <- ->");
                     Console.Write($"{Nev} Verath: ");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    Console.WriteLine();
                     elagazas = Console.ReadKey().Key;
                     if (elagazas == ConsoleKey.LeftArrow)
                     {
@@ -130,26 +205,60 @@ namespace JatekProjekt
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine(" KEZDJÜK ÚJRA! ");
                         Console.ResetColor();
+                        Console.WriteLine();
                         goto elso;
                     }
                 }
+                else
+                {
+                    Console.Clear();
+                    goto elso;
+                }
+                Console.WriteLine("Nyomj meg egy billentyűt a folytatáshoz...");
+                bilo = Console.ReadKey(true).Key;
+                Console.Clear();
                 
             masodik:
-                Console.WriteLine("MÁSODIK ELÁGAZÁS (<- ->)");
+                Console.WriteLine();
+                string masodter = "MASODTER MASODTER MASODTER MASODTER";
+                string[] szavakMasodter = masodter.Split(' ');
+
+                foreach (string szo in szavakMasodter)
+                {
+
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(szo + " ");
+                    Thread.Sleep(300);
+                    Console.ResetColor();
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.WriteLine("Mit teszel? <- ->");
                 Console.Write($"{Nev} Verath: ");
+                Console.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine();
                 elagazas = Console.ReadKey().Key;
                 if (elagazas == ConsoleKey.LeftArrow)
                 {
                     Console.WriteLine("OPCIO1");
 
-                    Console.WriteLine("Mit teszel? (<- ->)");
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.WriteLine("Mit teszel? <- ->");
                     Console.Write($"{Nev} Verath: ");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    Console.WriteLine();
                     elagazas = Console.ReadKey().Key;
                     if (elagazas == ConsoleKey.LeftArrow)
                     {
                         Console.WriteLine("opc1 KIMENETEL1");
-                        //mittudom én vesszen 7 HP
-                        HP = HP - 7;
+                        //mittudom én vesszen 15 HP
+                        HP = HP - 15;
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine($"Aktuális életerő: {HP}");
                         Console.ResetColor();
@@ -170,6 +279,7 @@ namespace JatekProjekt
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine(" KEZDJÜK ÚJRA! ");
                         Console.ResetColor();
+                        Console.WriteLine();
                         goto masodik;
                     }
                     
@@ -179,8 +289,13 @@ namespace JatekProjekt
                 {
                     Console.WriteLine("OPCIO2");
 
-                    Console.WriteLine("Mit teszel? (<- ->)");
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.WriteLine("Mit teszel? <- ->");
                     Console.Write($"{Nev} Verath: ");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    Console.WriteLine();
                     elagazas = Console.ReadKey().Key;
                     if (elagazas == ConsoleKey.LeftArrow)
                     {
@@ -195,8 +310,8 @@ namespace JatekProjekt
                     else if (elagazas == ConsoleKey.RightArrow)
                     {
                         Console.WriteLine("opc2 KIMENETEL2!");
-                        //mittudom én szerezzen 17 HP
-                        HP = HP - 17;
+                        //mittudom én szerezzen 20 HP
+                        HP = HP - 20;
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine($"Aktuális életerő: {HP}");
                         Console.ResetColor();
@@ -207,21 +322,56 @@ namespace JatekProjekt
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine(" KEZDJÜK ÚJRA! ");
                         Console.ResetColor();
+                        Console.WriteLine();
                         goto masodik;
                     }
                 }
-                
+                else
+                {
+                    Console.Clear();
+                    goto masodik;
+                }
+                Console.WriteLine("Nyomj meg egy billentyűt a folytatáshoz...");
+                bilo = Console.ReadKey(true).Key;
+                Console.Clear();
+
             harmadikBOSS:
-                //HP FÜGGŐ BOSSFIGHT (if ennyi meg annyi felett)
-                Console.WriteLine("BOSSFIGHT (<- ->)");
+                //HP FÜGGŐ BOSSFIGHT (if ennyi meg annyi felett vagy alatt így meg úgy alakul)
+                string BOSS = "BOSS BOSS BOSS BOSS";
+                string[] szavakBOSS = BOSS.Split(' ');
+
+                foreach (string szo in szavakBOSS)
+                {
+
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(szo + " ");
+                    Thread.Sleep(300);
+                    Console.ResetColor();
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.WriteLine("Mit teszel? <- ->");
                 Console.Write($"{Nev} Verath: ");
+                Console.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine();
                 elagazas = Console.ReadKey().Key;
+            
                 if (elagazas == ConsoleKey.LeftArrow)
                 {
+                    
                     Console.WriteLine("OPCIO1");
 
-                    Console.WriteLine("Mit teszel? (<- ->)");
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.WriteLine("Mit teszel? <- ->");
                     Console.Write($"{Nev} Verath: ");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    Console.WriteLine();
                     elagazas = Console.ReadKey().Key;
                     if (elagazas == ConsoleKey.LeftArrow)
                     {
@@ -240,6 +390,7 @@ namespace JatekProjekt
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine(" KEZDJÜK ÚJRA! ");
                         Console.ResetColor();
+                        Console.WriteLine();
                         goto harmadikBOSS;
                     }
                 }
@@ -247,8 +398,13 @@ namespace JatekProjekt
                 {
                     Console.WriteLine("OPCIO2");
 
-                    Console.WriteLine("Mit teszel? (<- ->)");
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.WriteLine("Mit teszel? <- ->");
                     Console.Write($"{Nev} Verath: ");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    Console.WriteLine();
                     elagazas = Console.ReadKey().Key;
                     if (elagazas == ConsoleKey.LeftArrow)
                     {
@@ -267,11 +423,32 @@ namespace JatekProjekt
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine(" KEZDJÜK ÚJRA! ");
                         Console.ResetColor();
+                        Console.WriteLine();
                         goto harmadikBOSS;
                     }
                 }
-                Console.WriteLine("A történet folytatódik... (újra? enter:igen esc:nem)");
+                else
+                {
+                    Console.Clear();
+                    goto harmadikBOSS;
+                }
+                string ending = "VÉGE VÉGE VÉGE VÉGE";
+                string[] szavakEnding = ending.Split(' ');
+                Console.WriteLine();
+                foreach (string szo in szavakEnding)
+                {
+
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(szo + " ");
+                    Thread.Sleep(300);
+                    Console.ResetColor();
+                }
+                Console.WriteLine();
+                
+                
+            Console.WriteLine("A történetnek itt nincs vége... (újra? enter:igen esc:nem)");
             billentyu = Console.ReadKey(true).Key;
+            Console.Clear();
             } while (billentyu != ConsoleKey.Escape);
         }
     }
